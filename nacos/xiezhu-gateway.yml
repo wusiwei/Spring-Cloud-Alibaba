@@ -1,0 +1,25 @@
+server:
+  port: 8003
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: xiezhu-consumer
+        uri: lb://xiezhu-consumer
+        predicates:
+        - Path=/xiezhu-consumer/{segment}
+        filters:
+        - ConsumerFilter
+        - SetPath=/{segment}
+        
+    sentinel:
+      eager: true
+      transport:
+        port: 9003
+        dashboard: localhost:8080

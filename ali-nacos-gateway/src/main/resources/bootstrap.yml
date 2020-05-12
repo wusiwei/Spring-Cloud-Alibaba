@@ -1,0 +1,22 @@
+nacos:
+  server-addr: 127.0.0.1:8848
+  namespace: 9cd242d1-8fb6-4280-8342-d8e6c8aed888
+  config-namespace: 1b1c7e8c-f2db-4ab4-842a-38eeef7c8088
+  group: DEFAULT_GROUP
+
+spring:
+  application:
+    name: xiezhu-gateway
+  cloud:
+    nacos:
+      username: nacos
+      password: nacos
+      discovery:
+        server-addr: ${nacos.server-addr}
+        namespace: ${nacos.config-namespace}
+        group: ${nacos.group}
+      config:
+        server-addr: ${nacos.server-addr}
+        namespace: ${nacos.config-namespace}
+        file-extension: yml
+        group: ${nacos.group}
